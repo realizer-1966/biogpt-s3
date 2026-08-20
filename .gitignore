@@ -1,0 +1,34 @@
+# PlatformIO
+.pioenvs/
+.piolibdeps/
+
+# 생성된 코퍼스 헤더 (원본 텍스트는 보관)
+src/corpus_ecg.h
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 빌드 산출물
+build/
+dist/
+*.bin
+*.elf
+*.map
+
+# 시리얼 로그
+*.log
+
+# 모델 체크포인트 (LittleFS)
+model.bin

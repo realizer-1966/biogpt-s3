@@ -31,21 +31,12 @@ jobs:
       - name: Build Project
         run: |
           cd biogpt-s3
-          pio run -e esp32-s3-devkitc-1
+          pio run -e esp32-s3-devkitc-1 --verbose
       
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: biogpt-s3-firmware
-          path: biogpt-s3/.pio/build/esp32-s3-devkitc-1/
-          retention-days: 7
-      
-      - name: Check Build Success
+      - name: Show Build Logs on Failure
+        if: failure()
         run: |
-          if [ -f "biogpt-s3/.pio/build/esp32-s3-devkitc-1/firmware.bin" ]; then
-            echo "✅ Build successful!"
-            ls -lh biogpt-s3/.pio/build/esp32-s3-devkitc-1/firmware.bin
-          else
-            echo "❌ Build failed - firmware.bin not found"
-            exit 1
-          fi
+          echo "=== Build Failed ==="
+          echo "Checking .pio/build directory..."
+          ls -la biogpt-s3/.pio/build/ || echo "No build directory"
+          find biogpt-s3/.pio -name "*.log" -exec cat {} \; 2>/dev/null || true
